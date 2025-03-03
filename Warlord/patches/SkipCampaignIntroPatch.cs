@@ -5,7 +5,7 @@ using TaleWorlds.MountAndBlade;
 namespace Warlord.patches
 {
     [HarmonyPatch(typeof(GameStateManager), "CleanAndPushState")]
-    class SkipIntroPatch
+    class SkipCampaignIntroPatch
     {
         public static void Prefix(GameState gameState)
         {

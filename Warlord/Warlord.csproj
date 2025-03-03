@@ -78,7 +78,7 @@
     <Compile Include="models\GetParticipantArmour.cs" />
     <Compile Include="models\PartySizeModel.cs" />
     <Compile Include="patches\IsSearchAvailablePatch.cs" />
-    <Compile Include="patches\SkipIntroPatch.cs" />
+    <Compile Include="patches\SkipCampaignIntroPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

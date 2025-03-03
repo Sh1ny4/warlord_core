@@ -3,6 +3,8 @@ using TaleWorlds.Core;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.Issues;
+using System.Security.AccessControl;
 
 namespace Warlord
 {
@@ -23,7 +25,16 @@ namespace Warlord
                 campaignGameStarter.AddBehavior(new patches.EliteInCastle.CastleRecruitMenu());
             }
         }*/
-
+        protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
+        {
+            base.OnGameStart(game, gameStarterObject);
+            if (game.GameType is Campaign)
+            {
+                CampaignGameStarter starter = gameStarterObject as CampaignGameStarter;
+                starter.AddModel(new models.GetParticipantArmour());
+                starter.AddModel(new models.PartySizeModel());
+            }
+        }
         public override void OnGameInitializationFinished(Game game)
         {
             if (!(game.GameType is Campaign)) return;

@@ -9,7 +9,7 @@ namespace Warlord.patches
         [HarmonyPostfix]
         static void Postfix(ref bool __result)
         {
-            //always enable the search bar in inventoiry
+            //always enable the search bar in inventory
             __result = true;
         }
     }

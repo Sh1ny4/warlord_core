@@ -314,13 +314,8 @@ namespace Warlord.models
         private readonly TextObject _leadershipPerkUltimateLeaderBonusText = GameTexts.FindText("str_leadership_perk_bonus", null);
         private readonly TextObject _wallLevelBonusText = GameTexts.FindText("str_map_tooltip_wall_level", null);
         private readonly TextObject _baseSizeText = GameTexts.FindText("str_base_size", null);
-        private readonly TextObject _clanTierText = GameTexts.FindText("str_clan_tier_bonus", null);
-        private readonly TextObject _renownText = GameTexts.FindText("str_renown_bonus", null);
-        private readonly TextObject _clanLeaderText = GameTexts.FindText("str_clan_leader_bonus", null);
         private readonly TextObject _factionLeaderText = GameTexts.FindText("str_faction_leader_bonus", null);
-        private readonly TextObject _leaderLevelText = GameTexts.FindText("str_leader_level_bonus", null);
         private readonly TextObject _townBonusText = GameTexts.FindText("str_town_bonus", null);
-        private readonly TextObject _minorFactionText = GameTexts.FindText("str_minor_faction_bonus", null);
         private readonly TextObject _currentPartySizeBonusText = GameTexts.FindText("str_current_party_size_bonus", null);
         private readonly TextObject _randomSizeBonusTemporary = new TextObject("{=hynFV8jC}Extra size bonus (Perk-like Effect)", null);
         private static bool _addAdditionalPartySizeAsCheat;

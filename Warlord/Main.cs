@@ -40,5 +40,9 @@ namespace Warlord
             if (!(game.GameType is Campaign)) return;
             Campaign.Current.CampaignBehaviorManager.RemoveBehavior<BackstoryCampaignBehavior>();
         }
+        protected override void OnBeforeInitialModuleScreenSetAsRoot()
+        {
+            AccessTools.Field(typeof(Module), "_splashScreenPlayed").SetValue(Module.CurrentModule, true);
+        }
     }
 }

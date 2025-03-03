@@ -47,11 +47,11 @@ namespace Warlord.models
 
         private ExplainedNumber CalculateMobilePartyMemberSizeLimit(MobileParty party, bool includeDescriptions = false)
         {
-            ExplainedNumber result = new ExplainedNumber(20f, includeDescriptions, this._baseSizeText);
+            ExplainedNumber result = new ExplainedNumber(40f, includeDescriptions, this._baseSizeText);
             if (party.LeaderHero != null && party.LeaderHero.Clan != null && !party.IsCaravan)
             {
                 this.CalculateBaseMemberSize(party.LeaderHero, party.MapFaction, party.ActualClan, ref result);
-                result.Add((float)(party.EffectiveQuartermaster.GetSkillValue(DefaultSkills.Steward) / 4), this._quarterMasterText, null);
+                result.Add((float)(party.EffectiveQuartermaster.GetSkillValue(DefaultSkills.Leadership) / 4), this._leadershipSkillLevelBonusText, null);
                 if (PartySizeModel._addAdditionalPartySizeAsCheat && party.IsMainParty && Game.Current.CheatMode)
                 {
                     result.Add(5000f, new TextObject("{=!}Additional size from extra party cheat", null), null);
@@ -187,7 +187,7 @@ namespace Warlord.models
             if (leaderHero != null && leaderHero.Clan != null)
             {
                 this.CalculateBaseMemberSize(leaderHero, partyMapFaction, actualClan, ref explainedNumber);
-                explainedNumber.Add((float)(leaderHero.GetSkillValue(DefaultSkills.Steward) / 4), this._quarterMasterText, null);
+                explainedNumber.Add((float)(leaderHero.GetSkillValue(DefaultSkills.Leadership) / 4), this._leadershipSkillLevelBonusText, null);
             }
             return (int)explainedNumber.BaseNumber;
         }
@@ -310,14 +310,6 @@ namespace Warlord.models
                 }
             }
         }
-
-        private const int BaseMobilePartySize = 20;
-        private const int BaseMobilePartyPrisonerSize = 10;
-        private const int BaseSettlementPrisonerSize = 60;
-        private const int SettlementPrisonerSizeBonusPerWallLevel = 40;
-        private const int BaseGarrisonPartySize = 200;
-        private const int TownGarrisonSizeBonus = 200;
-        private const int AdditionalPartySizeForCheat = 5000;
         private readonly TextObject _leadershipSkillLevelBonusText = GameTexts.FindText("str_leadership_skill_level_bonus", null);
         private readonly TextObject _leadershipPerkUltimateLeaderBonusText = GameTexts.FindText("str_leadership_perk_bonus", null);
         private readonly TextObject _wallLevelBonusText = GameTexts.FindText("str_map_tooltip_wall_level", null);

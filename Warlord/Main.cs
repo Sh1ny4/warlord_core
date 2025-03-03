@@ -5,6 +5,8 @@ using TaleWorlds.MountAndBlade;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.Issues;
 using System.Security.AccessControl;
+using TaleWorlds.CampaignSystem.GameComponents;
+using TaleWorlds.CampaignSystem.ComponentInterfaces;
 
 namespace Warlord
 {
@@ -33,6 +35,8 @@ namespace Warlord
                 CampaignGameStarter starter = gameStarterObject as CampaignGameStarter;
                 starter.AddModel(new models.GetParticipantArmour());
                 starter.AddModel(new models.PartySizeModel());
+                starter.AddModel(new models.RemoveInformationRestriction());
+                starter.AddModel(new models.RemoveMilitiaModel());
             }
         }
         public override void OnGameInitializationFinished(Game game)

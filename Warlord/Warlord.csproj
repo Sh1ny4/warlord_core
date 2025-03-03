@@ -76,7 +76,9 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="models\GetParticipantArmour.cs" />
+    <Compile Include="models\RemoveInformationRestriction.cs" />
     <Compile Include="models\PartySizeModel.cs" />
+    <Compile Include="models\RemoveMilitiaModel.cs" />
     <Compile Include="patches\IsSearchAvailablePatch.cs" />
     <Compile Include="patches\SkipCampaignIntroPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

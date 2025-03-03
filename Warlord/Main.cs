@@ -8,13 +8,13 @@ namespace Warlord
 {
     public class Main : MBSubModuleBase
     {
-        /*
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
-            new Harmony("wipo.patches").PatchAll();
+            new Harmony("Warlord.patches").PatchAll();
         }
 
+        /*
         protected override void InitializeGameStarter(Game game, IGameStarter starterObject)
         {
             if (starterObject is CampaignGameStarter)

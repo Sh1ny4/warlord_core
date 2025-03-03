@@ -3,10 +3,6 @@ using TaleWorlds.Core;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
-using TaleWorlds.CampaignSystem.Issues;
-using System.Security.AccessControl;
-using TaleWorlds.CampaignSystem.GameComponents;
-using TaleWorlds.CampaignSystem.ComponentInterfaces;
 
 namespace Warlord
 {

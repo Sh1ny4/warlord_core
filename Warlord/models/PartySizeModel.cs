@@ -47,11 +47,7 @@ namespace Warlord.models
             if (party.LeaderHero != null && party.LeaderHero.Clan != null && !party.IsCaravan)
             {
                 this.CalculateBaseMemberSize(party.LeaderHero, party.MapFaction, party.ActualClan, ref result);
-                result.Add((float)(party.EffectiveQuartermaster.GetSkillValue(DefaultSkills.Leadership) / 4), this._leadershipSkillLevelBonusText, null);
-                if (PartySizeModel._addAdditionalPartySizeAsCheat && party.IsMainParty && Game.Current.CheatMode)
-                {
-                    result.Add(5000f, new TextObject("{=!}Additional size from extra party cheat", null), null);
-                }
+                result.Add((float)(party.EffectiveQuartermaster.GetSkillValue(DefaultSkills.Leadership) / 3), this._leadershipSkillLevelBonusText, null);
             }
             else if (party.IsCaravan)
             {
@@ -102,10 +98,6 @@ namespace Warlord.models
             ExplainedNumber result = new ExplainedNumber(10f, includeDescriptions, this._baseSizeText);
             result.Add((float)this.GetCurrentPartySizeEffect(party), this._currentPartySizeBonusText, null);
             this.AddMobilePartyLeaderPrisonerSizePerkEffects(party, ref result);
-            if (PartySizeModel._addAdditionalPrisonerSizeAsCheat && party.IsMobile && party.MobileParty.IsMainParty && Game.Current.CheatMode)
-            {
-                result.Add(5000f, new TextObject("{=!}Additional size from extra prisoner cheat", null), null);
-            }
             return result;
         }
 
@@ -314,8 +306,6 @@ namespace Warlord.models
         private readonly TextObject _townBonusText = GameTexts.FindText("str_town_bonus", null);
         private readonly TextObject _currentPartySizeBonusText = GameTexts.FindText("str_current_party_size_bonus", null);
         private readonly TextObject _randomSizeBonusTemporary = new TextObject("{=hynFV8jC}Extra size bonus (Perk-like Effect)", null);
-        private static bool _addAdditionalPartySizeAsCheat;
-        private static bool _addAdditionalPrisonerSizeAsCheat;
         private TextObject _quarterMasterText;
         private enum LimitType
         {

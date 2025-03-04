@@ -98,7 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Submodule.cs" />
-    <Compile Include="CharacterCreationWarlord\CharacterCreationRedone.cs" />
+    <Compile Include="patches\CharacterCreationRedone.cs" />
     <Compile Include="models\GetParticipantArmour.cs" />
     <Compile Include="models\ManhunterPartyComponant.cs" />
     <Compile Include="models\RemoveInformationRestriction.cs" />

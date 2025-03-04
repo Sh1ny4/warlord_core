@@ -1,4 +1,5 @@
-﻿using Helpers;
+﻿using HarmonyLib;
+using Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -9,11 +10,18 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace Warlord.models.CharacterCreationWarlord
+namespace Warlord.patches
 {
+    [HarmonyPatch(typeof(SandboxCharacterCreationContent), "OnInitialized")]
     class CharacterCreationRedone : SandboxCharacterCreationContent
     {
-        protected override void OnInitialized(CharacterCreation characterCreation)
+        [HarmonyPrefix]
+        static bool Prefix(ref CharacterCreationRedone __instance, CharacterCreation characterCreation)
+        {
+            __instance.AddMenus(characterCreation);
+            return false;
+        }
+        public void AddMenus(CharacterCreation characterCreation)
         {
             this.AddParentsMenu(characterCreation);
             this.AddChildhoodMenu(characterCreation);

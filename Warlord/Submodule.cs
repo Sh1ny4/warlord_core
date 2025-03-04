@@ -43,7 +43,8 @@ namespace Warlord
                 CampaignGameStarter campaignGameStarter = starterObject as CampaignGameStarter;
                 campaignGameStarter.AddBehavior(new patches.EliteInCastle.CastleRecruitMenu());
             }
-        }*/
+        }
+        */
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
         {
             base.OnGameStart(game, gameStarterObject);

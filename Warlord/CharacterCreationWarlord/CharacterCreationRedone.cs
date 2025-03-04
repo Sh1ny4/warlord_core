@@ -9,7 +9,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace Warlord.models
+namespace Warlord.models.CharacterCreationWarlord
 {
     class CharacterCreationRedone : SandboxCharacterCreationContent
     {

@@ -12,7 +12,7 @@ using SandBox;
 
 namespace Warlord
 {
-    public class Main : MBSubModuleBase
+    public class Submodule : MBSubModuleBase
     {
         protected override void OnSubModuleLoad()
         {

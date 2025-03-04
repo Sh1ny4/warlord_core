@@ -98,7 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
+    <Compile Include="models\CharacterCreationRedone.cs" />
     <Compile Include="models\GetParticipantArmour.cs" />
+    <Compile Include="models\ManhunterPartyComponant.cs" />
     <Compile Include="models\RemoveInformationRestriction.cs" />
     <Compile Include="models\PartySizeModel.cs" />
     <Compile Include="models\RemoveMilitiaModel.cs" />

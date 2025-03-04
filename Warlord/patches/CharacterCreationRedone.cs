@@ -34,11 +34,10 @@ namespace Warlord.patches
         protected override void OnApplyCulture()
         {
         }
-
         new protected void AddParentsMenu(CharacterCreation characterCreation)
         {
             CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("{=b4lDDcli}Family", null), new TextObject("{=XgFU1pCx}You were born into a family of...", null), new CharacterCreationOnInit(this.ParentsOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
-            
+
             CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(new CharacterCreationOnCondition(this.EmpireParentsOnCondition));
             characterCreationCategory.AddCategoryOption(new TextObject("{=InN5ZZt3}A landlord's retainers", null), new MBList<SkillObject> { DefaultSkills.Trade, DefaultSkills.Charm }, DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.EmpireLandlordsRetainerOnConsequence), new CharacterCreationApplyFinalEffects(this.EmpireLandlordsRetainerOnApply), new TextObject("{=ivKl4mV2}Your father was a trusted lieutenant of the local landowning aristocrat. He rode with the lord's cavalry, fighting as an armored lancer.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory.AddCategoryOption(new TextObject("{=651FhzdR}Urban merchants", null), new MBList<SkillObject> { DefaultSkills.Athletics, DefaultSkills.Polearm }, DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.EmpireMerchantOnConsequence), new CharacterCreationApplyFinalEffects(this.EmpireMerchantOnApply), new TextObject("{=FQntPChs}Your family were merchants in one of the main cities of the Empire. They sometimes organized caravans to nearby towns, and discussed issues in the town council.", null), null, 0, 0, 0, 0, 0);
@@ -46,7 +45,7 @@ namespace Warlord.patches
             characterCreationCategory.AddCategoryOption(new TextObject("{=v48N6h1t}Urban artisans", null), new MBList<SkillObject> { DefaultSkills.Scouting, DefaultSkills.Bow }, DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.EmpireArtisanOnConsequence), new CharacterCreationApplyFinalEffects(this.EmpireArtisanOnApply), new TextObject("{=ueCm5y1C}Your family owned their own workshop in a city, making goods from raw materials brought in from the countryside. Your father played an active if minor role in the town council, and also served in the militia.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory.AddCategoryOption(new TextObject("{=7eWmU2mF}Foresters", null), new MBList<SkillObject> { DefaultSkills.Roguery, DefaultSkills.Throwing }, DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.EmpireWoodsmanOnConsequence), new CharacterCreationApplyFinalEffects(this.EmpireWoodsmanOnApply), new TextObject("{=yRFSzSDZ}Your family lived in a village, but did not own their own land. Instead, your father supplemented paid jobs with long trips in the woods, hunting and trapping, always keeping a wary eye for the lord's game wardens.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory.AddCategoryOption(new TextObject("{=aEke8dSb}Urban vagabonds", null), new MBList<SkillObject> { DefaultSkills.Riding, DefaultSkills.Polearm }, DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.EmpireVagabondOnConsequence), new CharacterCreationApplyFinalEffects(this.EmpireVagabondOnApply), new TextObject("{=Jvf6K7TZ}Your family numbered among the many poor migrants living in the slums that grow up outside the walls of imperial cities, making whatever money they could from a variety of odd jobs. Sometimes they did service for one of the Empire's many criminal gangs, and you had an early look at the dark side of life.", null), null, 0, 0, 0, 0, 0);
-            
+
             CharacterCreationCategory characterCreationCategory2 = characterCreationMenu.AddMenuCategory(new CharacterCreationOnCondition(this.VlandianParentsOnCondition));
             characterCreationCategory2.AddCategoryOption(new TextObject("{=2TptWc4m}A baron's retainers", null), new MBList<SkillObject> { DefaultSkills.Riding, DefaultSkills.Polearm }, DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.VlandiaBaronsRetainerOnConsequence), new CharacterCreationApplyFinalEffects(this.VlandiaBaronsRetainerOnApply), new TextObject("{=0Suu1Q9q}Your father was a bailiff for a local feudal magnate. He looked after his liege's estates, resolved disputes in the village, and helped train the village levy. He rode with the lord's cavalry, fighting as an armored knight.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory2.AddCategoryOption(new TextObject("{=651FhzdR}Urban merchants", null), new MBList<SkillObject> { DefaultSkills.Trade, DefaultSkills.Charm }, DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.VlandiaMerchantOnConsequence), new CharacterCreationApplyFinalEffects(this.VlandiaMerchantOnApply), new TextObject("{=qNZFkxJb}Your family were merchants in one of the main cities of the kingdom. They organized caravans to nearby towns and were active in the local merchant's guild.", null), null, 0, 0, 0, 0, 0);
@@ -54,7 +53,7 @@ namespace Warlord.patches
             characterCreationCategory2.AddCategoryOption(new TextObject("{=p2KIhGbE}Urban blacksmith", null), new MBList<SkillObject> { DefaultSkills.Crafting, DefaultSkills.TwoHanded }, DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.VlandiaBlacksmithOnConsequence), new CharacterCreationApplyFinalEffects(this.VlandiaBlacksmithOnApply), new TextObject("{=btsMpRcA}Your family owned a smithy in a city. Your father played an active if minor role in the town council, and also served in the militia.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory2.AddCategoryOption(new TextObject("{=YcnK0Thk}Hunters", null), new MBList<SkillObject> { DefaultSkills.Scouting, DefaultSkills.Crossbow }, DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.VlandiaHunterOnConsequence), new CharacterCreationApplyFinalEffects(this.VlandiaHunterOnApply), new TextObject("{=yRFSzSDZ}Your family lived in a village, but did not own their own land. Instead, your father supplemented paid jobs with long trips in the woods, hunting and trapping, always keeping a wary eye for the lord's game wardens.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory2.AddCategoryOption(new TextObject("{=ipQP6aVi}Mercenaries", null), new MBList<SkillObject> { DefaultSkills.Roguery, DefaultSkills.Crossbow }, DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.VlandiaMercenaryOnConsequence), new CharacterCreationApplyFinalEffects(this.VlandiaMercenaryOnApply), new TextObject("{=yYhX6JQC}Your father joined one of Vlandia's many mercenary companies, composed of men who got such a taste for war in their lord's service that they never took well to peace. Their crossbowmen were much valued across Calradia. Your mother was a camp follower, taking you along in the wake of bloody campaigns.", null), null, 0, 0, 0, 0, 0);
-            
+
             CharacterCreationCategory characterCreationCategory3 = characterCreationMenu.AddMenuCategory(new CharacterCreationOnCondition(this.SturgianParentsOnCondition));
             characterCreationCategory3.AddCategoryOption(new TextObject("{=mc78FEbA}A boyar's companions", null), new MBList<SkillObject> { DefaultSkills.Riding, DefaultSkills.TwoHanded }, DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.SturgiaBoyarsCompanionOnConsequence), new CharacterCreationApplyFinalEffects(this.SturgiaBoyarsCompanionOnApply), new TextObject("{=hob3WVkU}Your father was a member of a boyar's druzhina, the 'companions' that make up his retinue. He sat at his lord's table in the great hall, oversaw the boyar's estates, and stood by his side in the center of the shield wall in battle.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory3.AddCategoryOption(new TextObject("{=HqzVBfpl}Urban traders", null), new MBList<SkillObject> { DefaultSkills.Trade, DefaultSkills.Tactics }, DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.SturgiaTraderOnConsequence), new CharacterCreationApplyFinalEffects(this.SturgiaTraderOnApply), new TextObject("{=bjVMtW3W}Your family were merchants who lived in one of Sturgia's great river ports, organizing the shipment of the north's bounty of furs, honey and other goods to faraway lands.", null), null, 0, 0, 0, 0, 0);
@@ -62,7 +61,7 @@ namespace Warlord.patches
             characterCreationCategory3.AddCategoryOption(new TextObject("{=v48N6h1t}Urban artisans", null), new MBList<SkillObject> { DefaultSkills.Crafting, DefaultSkills.OneHanded }, DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.SturgiaArtisanOnConsequence), new CharacterCreationApplyFinalEffects(this.SturgiaArtisanOnApply), new TextObject("{=ueCm5y1C}Your family owned their own workshop in a city, making goods from raw materials brought in from the countryside. Your father played an active if minor role in the town council, and also served in the militia.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory3.AddCategoryOption(new TextObject("{=YcnK0Thk}Hunters", null), new MBList<SkillObject> { DefaultSkills.Scouting, DefaultSkills.Bow }, DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.SturgiaHunterOnConsequence), new CharacterCreationApplyFinalEffects(this.SturgiaHunterOnApply), new TextObject("{=WyZ2UtFF}Your family had no taste for the authority of the boyars. They made their living deep in the woods, slashing and burning fields which they tended for a year or two before moving on. They hunted and trapped fox, hare, ermine, and other fur-bearing animals.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory3.AddCategoryOption(new TextObject("{=TPoK3GSj}Vagabonds", null), new MBList<SkillObject> { DefaultSkills.Roguery, DefaultSkills.Throwing }, DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.SturgiaVagabondOnConsequence), new CharacterCreationApplyFinalEffects(this.SturgiaVagabondOnApply), new TextObject("{=2SDWhGmQ}Your family numbered among the poor migrants living in the slums that grow up outside the walls of the river cities, making whatever money they could from a variety of odd jobs. Sometimes they did services for one of the region's many criminal gangs.", null), null, 0, 0, 0, 0, 0);
-            
+
             CharacterCreationCategory characterCreationCategory4 = characterCreationMenu.AddMenuCategory(new CharacterCreationOnCondition(this.AseraiParentsOnCondition));
             characterCreationCategory4.AddCategoryOption(new TextObject("{=Sw8OxnNr}Kinsfolk of an emir", null), new MBList<SkillObject> { DefaultSkills.Riding, DefaultSkills.Throwing }, DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.AseraiTribesmanOnConsequence), new CharacterCreationApplyFinalEffects(this.AseraiTribesmanOnApply), new TextObject("{=MFrIHJZM}Your family was from a smaller offshoot of an emir's tribe. Your father's land gave him enough income to afford a horse but he was not quite wealthy enough to buy the armor needed to join the heavier cavalry. He fought as one of the light horsemen for which the desert is famous.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory4.AddCategoryOption(new TextObject("{=ngFVgwDD}Warrior-slaves", null), new MBList<SkillObject> { DefaultSkills.Riding, DefaultSkills.Polearm }, DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.AseraiWariorSlaveOnConsequence), new CharacterCreationApplyFinalEffects(this.AseraiWariorSlaveOnApply), new TextObject("{=GsPC2MgU}Your father was part of one of the slave-bodyguards maintained by the Aserai emirs. He fought by his master's side with tribe's armored cavalry, and was freed - perhaps for an act of valor, or perhaps he paid for his freedom with his share of the spoils of battle. He then married your mother.", null), null, 0, 0, 0, 0, 0);
@@ -70,7 +69,7 @@ namespace Warlord.patches
             characterCreationCategory4.AddCategoryOption(new TextObject("{=g31pXuqi}Oasis farmers", null), new MBList<SkillObject> { DefaultSkills.Athletics, DefaultSkills.OneHanded }, DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.AseraiOasisFarmerOnConsequence), new CharacterCreationApplyFinalEffects(this.AseraiOasisFarmerOnApply), new TextObject("{=5P0KqBAw}Your family tilled the soil in one of the oases of the Nahasa and tended the palm orchards that produced the desert's famous dates. Your father was a member of the main foot levy of his tribe, fighting with his kinsmen under the emir's banner.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory4.AddCategoryOption(new TextObject("{=EEedqolz}Bedouin", null), new MBList<SkillObject> { DefaultSkills.Scouting, DefaultSkills.Bow }, DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.AseraiBedouinOnConsequence), new CharacterCreationApplyFinalEffects(this.AseraiBedouinOnApply), new TextObject("{=PKhcPbBX}Your family were part of a nomadic clan, crisscrossing the wastes between wadi beds and wells to feed their herds of goats and camels on the scraggly scrubs of the Nahasa.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory4.AddCategoryOption(new TextObject("{=tRIrbTvv}Urban back-alley thugs", null), new MBList<SkillObject> { DefaultSkills.Roguery, DefaultSkills.Polearm }, DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.AseraiBackAlleyThugOnConsequence), new CharacterCreationApplyFinalEffects(this.AseraiBackAlleyThugOnApply), new TextObject("{=6bUSbsKC}Your father worked for a fitiwi, one of the strongmen who keep order in the poorer quarters of the oasis towns. He resolved disputes over land, dice and insults, imposing his authority with the fitiwi's traditional staff.", null), null, 0, 0, 0, 0, 0);
-            
+
             CharacterCreationCategory characterCreationCategory5 = characterCreationMenu.AddMenuCategory(new CharacterCreationOnCondition(this.BattanianParentsOnCondition));
             characterCreationCategory5.AddCategoryOption(new TextObject("{=GeNKQlHR}Members of the chieftain's hearthguard", null), new MBList<SkillObject> { DefaultSkills.TwoHanded, DefaultSkills.Bow }, DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.BattaniaChieftainsHearthguardOnConsequence), new CharacterCreationApplyFinalEffects(this.BattaniaChieftainsHearthguardOnApply), new TextObject("{=LpH8SYFL}Your family were the trusted kinfolk of a Battanian chieftain, and sat at his table in his great hall. Your father assisted his chief in running the affairs of the clan and trained with the traditional weapons of the Battanian elite, the two-handed sword or falx and the bow.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory5.AddCategoryOption(new TextObject("{=AeBzTj6w}Healers", null), new MBList<SkillObject> { DefaultSkills.Medicine, DefaultSkills.Charm }, DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.BattaniaHealerOnConsequence), new CharacterCreationApplyFinalEffects(this.BattaniaHealerOnApply), new TextObject("{=j6py5Rv5}Your parents were healers who gathered herbs and treated the sick. As a living reservoir of Battanian tradition, they were also asked to adjudicate many disputes between the clans.", null), null, 0, 0, 0, 0, 0);
@@ -78,7 +77,7 @@ namespace Warlord.patches
             characterCreationCategory5.AddCategoryOption(new TextObject("{=BCU6RezA}Smiths", null), new MBList<SkillObject> { DefaultSkills.Crafting, DefaultSkills.TwoHanded }, DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.BattaniaSmithOnConsequence), new CharacterCreationApplyFinalEffects(this.BattaniaSmithOnApply), new TextObject("{=kg9YtrOg}Your family were smiths, a revered profession among the Battanians. They crafted everything from fine filigree jewelry in geometric designs to the well-balanced longswords favored by the Battanian aristocracy.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory5.AddCategoryOption(new TextObject("{=7eWmU2mF}Foresters", null), new MBList<SkillObject> { DefaultSkills.Scouting, DefaultSkills.Tactics }, DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.BattaniaWoodsmanOnConsequence), new CharacterCreationApplyFinalEffects(this.BattaniaWoodsmanOnApply), new TextObject("{=7jBroUUQ}Your family had little land of their own, so they earned their living from the woods, hunting and trapping. They taught you from an early age that skills like finding game trails and killing an animal with one shot could make the difference between eating and starvation.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory5.AddCategoryOption(new TextObject("{=SpJqhEEh}Bards", null), new MBList<SkillObject> { DefaultSkills.Roguery, DefaultSkills.Charm }, DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.BattaniaBardOnConsequence), new CharacterCreationApplyFinalEffects(this.BattaniaBardOnApply), new TextObject("{=aVzcyhhy}Your father was a bard, drifting from chieftain's hall to chieftain's hall making his living singing the praises of one Battanian aristocrat and mocking his enemies, then going to his enemy's hall and doing the reverse. You learned from him that a clever tongue could spare you  from a life toiling in the fields, if you kept your wits about you.", null), null, 0, 0, 0, 0, 0);
-            
+
             CharacterCreationCategory characterCreationCategory6 = characterCreationMenu.AddMenuCategory(new CharacterCreationOnCondition(this.KhuzaitParentsOnCondition));
             characterCreationCategory6.AddCategoryOption(new TextObject("{=FVaRDe2a}A noyan's kinsfolk", null), new MBList<SkillObject> { DefaultSkills.Riding, DefaultSkills.Polearm }, DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.KhuzaitNoyansKinsmanOnConsequence), new CharacterCreationApplyFinalEffects(this.KhuzaitNoyansKinsmanOnApply), new TextObject("{=jAs3kDXh}Your family were the trusted kinsfolk of a Khuzait noyan, and shared his meals in the chieftain's yurt. Your father assisted his chief in running the affairs of the clan and fought in the core of armored lancers in the center of the Khuzait battle line.", null), null, 0, 0, 0, 0, 0);
             characterCreationCategory6.AddCategoryOption(new TextObject("{=TkgLEDRM}Merchants", null), new MBList<SkillObject> { DefaultSkills.Trade, DefaultSkills.Charm }, DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.KhuzaitMerchantOnConsequence), new CharacterCreationApplyFinalEffects(this.KhuzaitMerchantOnApply), new TextObject("{=qPg3IDiq}Your family came from one of the merchant clans that dominated the cities in eastern Calradia before the Khuzait conquest. They adjusted quickly to their new masters, keeping the caravan routes running and ensuring that the tariff revenues that once went into imperial coffers now flowed to the khanate.", null), null, 0, 0, 0, 0, 0);
@@ -88,7 +87,6 @@ namespace Warlord.patches
             characterCreationCategory6.AddCategoryOption(new TextObject("{=Xqba1Obq}Nomads", null), new MBList<SkillObject> { DefaultSkills.Scouting, DefaultSkills.Riding }, DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.KhuzaitNomadOnConsequence), new CharacterCreationApplyFinalEffects(this.KhuzaitNomadOnApply), new TextObject("{=9aoQYpZs}Your family's clan never pledged its loyalty to the khan and never settled down, preferring to live out in the deep steppe away from his authority. They remain some of the finest trackers and scouts in the grasslands, as the ability to spot an enemy coming and move quickly is often all that protects their herds from their neighbors' predations.", null), null, 0, 0, 0, 0, 0);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-
         new protected void AddChildhoodMenu(CharacterCreation characterCreation)
         {
             CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("{=8Yiwt1z6}Early Childhood", null), new TextObject("{=character_creation_content_16}As a child you were noted for...", null), new CharacterCreationOnInit(this.ChildhoodOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
@@ -101,7 +99,6 @@ namespace Warlord.patches
             characterCreationCategory.AddCategoryOption(new TextObject("{=MEgLE2kj}your skill with horses.", null), new MBList<SkillObject> { DefaultSkills.Riding, DefaultSkills.Medicine }, DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(SandboxCharacterCreationContent.ChildhoodSkillsWithHorsesOnConsequence), new CharacterCreationApplyFinalEffects(SandboxCharacterCreationContent.ChildhoodAffinityWithAnimalsOnApply), new TextObject("{=ngazFofr}You were always drawn to animals, and spent as much time as possible hanging out in the village stables. You could calm horses, and were sometimes called upon to break in new colts. You learned the basics of veterinary arts, much of which is applicable to humans as well.", null), null, 0, 0, 0, 0, 0);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-
         new protected void AddEducationMenu(CharacterCreation characterCreation)
         {
             CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("{=rcoueCmk}Adolescence", null), this._educationIntroductoryText, new CharacterCreationOnInit(this.EducationOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
@@ -123,7 +120,6 @@ namespace Warlord.patches
             characterCreationCategory.AddCategoryOption(new TextObject("{=vH7GtuuK}working at the stables.", null), new MBList<SkillObject> { DefaultSkills.Riding, DefaultSkills.Steward }, DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, new CharacterCreationOnCondition(this.UrbanPoorAdolescenceOnCondition), new CharacterCreationOnSelect(this.UrbanAdolescenceHorserOnConsequence), new CharacterCreationApplyFinalEffects(SandboxCharacterCreationContent.UrbanAdolescenceDockerOnApply), new TextObject("{=csUq1RCC}You were employed as a hired hand at the town's stables. The overseers recognized that you had a knack for horses, and you were allowed to exercise them and sometimes even break in new steeds.", null), null, 0, 0, 0, 0, 0);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-
         new protected void AddYouthMenu(CharacterCreation characterCreation)
         {
             CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("{=ok8lSW6M}Youth", null), this._youthIntroductoryText, new CharacterCreationOnInit(this.YouthOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
@@ -143,7 +139,6 @@ namespace Warlord.patches
             characterCreationCategory.AddCategoryOption(new TextObject("{=GFUggps8}marched with the camp followers.", null), new MBList<SkillObject> { DefaultSkills.Roguery, DefaultSkills.Throwing }, DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, new CharacterCreationOnCondition(this.YouthCamperOnCondition), new CharacterCreationOnSelect(this.YouthCamperOnConsequence), new CharacterCreationApplyFinalEffects(this.YouthCamperOnApply), new TextObject("{=64rWqBLN}You avoided service with one of the main forces of your realm's armies, but followed instead in the train - the troops' wives, lovers and servants, and those who make their living by caring for, entertaining, or cheating the soldiery.", null), null, 0, 0, 0, 0, 0);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-
         new protected void AddAdulthoodMenu(CharacterCreation characterCreation)
         {
             MBTextManager.SetTextVariable("EXP_VALUE", this.SkillLevelToAdd);
@@ -163,7 +158,6 @@ namespace Warlord.patches
             characterCreationCategory.AddCategoryOption(new TextObject("{=Yqm0Dics}you treated people well.", null), new MBList<SkillObject> { DefaultSkills.Charm, DefaultSkills.Steward }, DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(this.AccomplishmentTreaterOnConsequence), new CharacterCreationApplyFinalEffects(this.AccomplishmentTreaterOnApply), new TextObject("{=dDmcqTzb}Yours wasn't the kind of reputation that local legends are made of, but it was the kind that wins you respect among those around you. You were consistently fair and honest in your business dealings and helpful to those in trouble. In doing so, you got a sense of what made people tick.", null), new MBList<TraitObject> { DefaultTraits.Mercy, DefaultTraits.Generosity, DefaultTraits.Honor }, 1, 5, 0, 0, 0);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-
         new protected void AddAgeSelectionMenu(CharacterCreation characterCreation)
         {
             MBTextManager.SetTextVariable("EXP_VALUE", this.SkillLevelToAdd);
@@ -175,7 +169,6 @@ namespace Warlord.patches
             characterCreationCategory.AddCategoryOption(new TextObject("{=!}50", null), new MBList<SkillObject>(), null, 0, 0, 0, null, new CharacterCreationOnSelect(this.StartingAgeElderlyOnConsequence), new CharacterCreationApplyFinalEffects(this.StartingAgeElderlyOnApply), new TextObject("{=ePD5Afvy}While you are past your prime, there is still enough time to go on that last big adventure for you. And you have all the experience you need to overcome anything!", null), null, 0, 0, 0, 8, 4);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-
         new protected void ParentsOnInit(CharacterCreation characterCreation)
         {
             characterCreation.IsPlayerAlone = false;
@@ -198,7 +191,6 @@ namespace Warlord.patches
             this.ChangeParentsOutfit(characterCreation, "", "", true, true);
             this.ChangeParentsAnimation(characterCreation);
         }
-
         new protected void ChangeParentsOutfit(CharacterCreation characterCreation, string fatherItemId = "", string motherItemId = "", bool isLeftHandItemForFather = true, bool isLeftHandItemForMother = true)
         {
             characterCreation.ClearFaceGenPrefab();
@@ -232,13 +224,11 @@ namespace Warlord.patches
             list.Add(equipment2);
             characterCreation.ChangeCharactersEquipment(list);
         }
-
         new protected void ChangeParentsAnimation(CharacterCreation characterCreation)
         {
             List<string> actionList = new List<string> { "anim_mother_" + base.SelectedParentType, "anim_father_" + base.SelectedParentType };
             characterCreation.ChangeCharsAnimation(actionList);
         }
-
         new protected void SetParentAndOccupationType(CharacterCreation characterCreation, int parentType, SandboxCharacterCreationContent.OccupationTypes occupationType, string fatherItemId = "", string motherItemId = "", bool isLeftHandItemForFather = true, bool isLeftHandItemForMother = true)
         {
             base.SelectedParentType = parentType;
@@ -247,37 +237,30 @@ namespace Warlord.patches
             this.ChangeParentsAnimation(characterCreation);
             this.ChangeParentsOutfit(characterCreation, fatherItemId, motherItemId, isLeftHandItemForFather, isLeftHandItemForMother);
         }
-
         new protected void EmpireLandlordsRetainerOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 1, SandboxCharacterCreationContent.OccupationTypes.Retainer, "", "", true, true);
         }
-
         new protected void EmpireMerchantOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 2, SandboxCharacterCreationContent.OccupationTypes.Merchant, "", "", true, true);
         }
-
         new protected void EmpireFreeholderOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 3, SandboxCharacterCreationContent.OccupationTypes.Farmer, "", "", true, true);
         }
-
         new protected void EmpireArtisanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 4, SandboxCharacterCreationContent.OccupationTypes.Artisan, "", "", true, true);
         }
-
         new protected void EmpireWoodsmanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 5, SandboxCharacterCreationContent.OccupationTypes.Hunter, "", "", true, true);
         }
-
         new protected void EmpireVagabondOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 6, SandboxCharacterCreationContent.OccupationTypes.Vagabond, "", "", true, true);
         }
-
         new protected void EmpireLandlordsRetainerOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
@@ -286,247 +269,198 @@ namespace Warlord.patches
         {
             this.FinalizeParents();
         }
-
         new protected void EmpireFreeholderOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void EmpireArtisanOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void EmpireWoodsmanOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void EmpireVagabondOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void VlandiaBaronsRetainerOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 1, SandboxCharacterCreationContent.OccupationTypes.Retainer, "", "", true, true);
         }
-
         new protected void VlandiaMerchantOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 2, SandboxCharacterCreationContent.OccupationTypes.Merchant, "", "", true, true);
         }
-
         new protected void VlandiaYeomanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 3, SandboxCharacterCreationContent.OccupationTypes.Farmer, "", "", true, true);
         }
-
         new protected void VlandiaBlacksmithOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 4, SandboxCharacterCreationContent.OccupationTypes.Artisan, "", "", true, true);
         }
-
         new protected void VlandiaHunterOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 5, SandboxCharacterCreationContent.OccupationTypes.Hunter, "", "", true, true);
         }
-
         new protected void VlandiaMercenaryOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 6, SandboxCharacterCreationContent.OccupationTypes.Mercenary, "", "", true, true);
         }
-
         new protected void VlandiaBaronsRetainerOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void VlandiaMerchantOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void VlandiaYeomanOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void VlandiaBlacksmithOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void VlandiaHunterOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void VlandiaMercenaryOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void SturgiaBoyarsCompanionOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 1, SandboxCharacterCreationContent.OccupationTypes.Retainer, "", "", true, true);
         }
-
         new protected void SturgiaTraderOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 2, SandboxCharacterCreationContent.OccupationTypes.Merchant, "", "", true, true);
         }
-
         new protected void SturgiaFreemanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 3, SandboxCharacterCreationContent.OccupationTypes.Farmer, "", "", true, true);
         }
-
         new protected void SturgiaArtisanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 4, SandboxCharacterCreationContent.OccupationTypes.Artisan, "", "", true, true);
         }
-
         new protected void SturgiaHunterOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 5, SandboxCharacterCreationContent.OccupationTypes.Hunter, "", "", true, true);
         }
-
         new protected void SturgiaVagabondOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 6, SandboxCharacterCreationContent.OccupationTypes.Vagabond, "", "", true, true);
         }
-
         new protected void SturgiaBoyarsCompanionOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void SturgiaTraderOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void SturgiaFreemanOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void SturgiaArtisanOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void SturgiaHunterOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void SturgiaVagabondOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void AseraiTribesmanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 1, SandboxCharacterCreationContent.OccupationTypes.Retainer, "", "", true, true);
         }
-
         new protected void AseraiWariorSlaveOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 2, SandboxCharacterCreationContent.OccupationTypes.Mercenary, "", "", true, true);
         }
-
         new protected void AseraiMerchantOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 3, SandboxCharacterCreationContent.OccupationTypes.Merchant, "", "", true, true);
         }
-
         new protected void AseraiOasisFarmerOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 4, SandboxCharacterCreationContent.OccupationTypes.Farmer, "", "", true, true);
         }
-
         new protected void AseraiBedouinOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 5, SandboxCharacterCreationContent.OccupationTypes.Herder, "", "", true, true);
         }
-
         new protected void AseraiBackAlleyThugOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 6, SandboxCharacterCreationContent.OccupationTypes.Artisan, "", "", true, true);
         }
-
         new protected void AseraiTribesmanOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void AseraiWariorSlaveOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void AseraiMerchantOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void AseraiOasisFarmerOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void AseraiBedouinOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void AseraiBackAlleyThugOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void BattaniaChieftainsHearthguardOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 1, SandboxCharacterCreationContent.OccupationTypes.Retainer, "", "", true, true);
         }
-
         new protected void BattaniaHealerOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 2, SandboxCharacterCreationContent.OccupationTypes.Healer, "", "", true, true);
         }
-
         new protected void BattaniaTribesmanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 3, SandboxCharacterCreationContent.OccupationTypes.Farmer, "", "", true, true);
         }
-
         new protected void BattaniaSmithOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 4, SandboxCharacterCreationContent.OccupationTypes.Artisan, "", "", true, true);
         }
-
         new protected void BattaniaWoodsmanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 5, SandboxCharacterCreationContent.OccupationTypes.Hunter, "", "", true, true);
         }
-
         new protected void BattaniaBardOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 6, SandboxCharacterCreationContent.OccupationTypes.Bard, "", "", true, true);
         }
-
         new protected void BattaniaChieftainsHearthguardOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void BattaniaHealerOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void BattaniaTribesmanOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
@@ -535,52 +469,42 @@ namespace Warlord.patches
         {
             this.FinalizeParents();
         }
-
         new protected void BattaniaWoodsmanOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void BattaniaBardOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void KhuzaitNoyansKinsmanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 1, SandboxCharacterCreationContent.OccupationTypes.Retainer, "", "", true, true);
         }
-
         new protected void KhuzaitMerchantOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 2, SandboxCharacterCreationContent.OccupationTypes.Merchant, "", "", true, true);
         }
-
         new protected void KhuzaitTribesmanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 3, SandboxCharacterCreationContent.OccupationTypes.Herder, "", "", true, true);
         }
-
         new protected void KhuzaitFarmerOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 4, SandboxCharacterCreationContent.OccupationTypes.Farmer, "", "", true, true);
         }
-
         new protected void KhuzaitShamanOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 5, SandboxCharacterCreationContent.OccupationTypes.Healer, "", "", true, true);
         }
-
         new protected void KhuzaitNomadOnConsequence(CharacterCreation characterCreation)
         {
             this.SetParentAndOccupationType(characterCreation, 6, SandboxCharacterCreationContent.OccupationTypes.Herder, "", "", true, true);
         }
-
         new protected void KhuzaitNoyansKinsmanOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void KhuzaitMerchantOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
@@ -589,52 +513,42 @@ namespace Warlord.patches
         {
             this.FinalizeParents();
         }
-
         new protected void KhuzaitFarmerOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void KhuzaitShamanOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected void KhuzaitNomadOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-
         new protected bool EmpireParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "empire";
         }
-
         new protected bool VlandianParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "vlandia";
         }
-
         new protected bool SturgianParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "sturgia";
         }
-
         new protected bool AseraiParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "aserai";
         }
-
         new protected bool BattanianParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "battania";
         }
-
         new protected bool KhuzaitParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "khuzait";
         }
-
         new protected void FinalizeParents()
         {
             CharacterObject @object = Game.Current.ObjectManager.GetObject<CharacterObject>("main_hero_mother");
@@ -665,7 +579,6 @@ namespace Warlord.patches
             @object.HeroObject.SetHasMet();
             object2.HeroObject.SetHasMet();
         }
-
         new protected static List<FaceGenChar> ChangePlayerFaceWithAge(float age, string actionName = "act_childhood_schooled")
         {
             List<FaceGenChar> list = new List<FaceGenChar>();
@@ -674,7 +587,6 @@ namespace Warlord.patches
             list.Add(new FaceGenChar(bodyProperties, CharacterObject.PlayerCharacter.Race, new Equipment(), CharacterObject.PlayerCharacter.IsFemale, actionName));
             return list;
         }
-
         new protected Equipment ChangePlayerOutfit(CharacterCreation characterCreation, string outfit)
         {
             List<Equipment> list = new List<Equipment>();
@@ -689,7 +601,6 @@ namespace Warlord.patches
             characterCreation.ChangeCharactersEquipment(list);
             return equipment;
         }
-
         new protected static void ChangePlayerMount(CharacterCreation characterCreation, Hero hero)
         {
             if (hero.CharacterObject.HasMount())
@@ -698,12 +609,10 @@ namespace Warlord.patches
                 characterCreation.SetFaceGenMount(faceGenMount);
             }
         }
-
         new protected static void ClearMountEntity(CharacterCreation characterCreation)
         {
             characterCreation.ClearFaceGenMounts();
         }
-
         new protected void ChildhoodOnInit(CharacterCreation characterCreation)
         {
             characterCreation.IsPlayerAlone = true;
@@ -716,61 +625,48 @@ namespace Warlord.patches
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_schooled" });
             SandboxCharacterCreationContent.ClearMountEntity(characterCreation);
         }
-
         new protected static void ChildhoodYourLeadershipSkillsOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_leader" });
         }
-
         new protected static void ChildhoodYourBrawnOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_athlete" });
         }
-
         new protected static void ChildhoodAttentionToDetailOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_memory" });
         }
-
         new protected static void ChildhoodAptitudeForNumbersOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_numbers" });
         }
-
         new protected static void ChildhoodWayWithPeopleOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_manners" });
         }
-
         new protected static void ChildhoodSkillsWithHorsesOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_animals" });
         }
-
         new protected static void ChildhoodGoodLeadingOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void ChildhoodGoodAthleticsOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void ChildhoodGoodMemoryOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void ChildhoodGoodMathOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void ChildhoodGoodMannersOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void ChildhoodAffinityWithAnimalsOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected void EducationOnInit(CharacterCreation characterCreation)
         {
             characterCreation.IsPlayerAlone = true;
@@ -786,37 +682,30 @@ namespace Warlord.patches
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_schooled" });
             SandboxCharacterCreationContent.ClearMountEntity(characterCreation);
         }
-
         new protected bool RuralType()
         {
             return this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Retainer || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Farmer || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Hunter || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Bard || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Herder || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Vagabond || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Healer || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Artisan;
         }
-
         new protected bool RichParents()
         {
             return this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Retainer || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Merchant;
         }
-
         new protected bool RuralAdolescenceOnCondition()
         {
             return this.RuralType();
         }
-
         new protected bool UrbanAdolescenceOnCondition()
         {
             return !this.RuralType();
         }
-
         new protected bool UrbanRichAdolescenceOnCondition()
         {
             return !this.RuralType() && this.RichParents();
         }
-
         new protected bool UrbanPoorAdolescenceOnCondition()
         {
             return !this.RuralType() && !this.RichParents();
         }
-
         new protected void RefreshPropsAndClothing(CharacterCreation characterCreation, bool isChildhoodStage, string itemId, bool isLeftHand, string secondItemId = "")
         {
             characterCreation.ClearFaceGenPrefab();
@@ -841,119 +730,96 @@ namespace Warlord.patches
             }
             characterCreation.ChangeCharactersEquipment(new List<Equipment> { equipment });
         }
-
         new protected void RuralAdolescenceHerderOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_streets" });
             this.RefreshPropsAndClothing(characterCreation, false, "carry_bostaff_rogue1", true, "");
         }
-
         new protected void RuralAdolescenceSmithyOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_militia" });
             this.RefreshPropsAndClothing(characterCreation, false, "peasant_hammer_1_t1", true, "");
         }
-
         new protected void RuralAdolescenceRepairmanOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_grit" });
             this.RefreshPropsAndClothing(characterCreation, false, "carry_hammer", true, "");
         }
-
         new protected void RuralAdolescenceGathererOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_peddlers" });
             this.RefreshPropsAndClothing(characterCreation, false, "_to_carry_bd_basket_a", true, "");
         }
-
         new protected void RuralAdolescenceHunterOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_sharp" });
             this.RefreshPropsAndClothing(characterCreation, false, "composite_bow", true, "");
         }
-
         new protected void RuralAdolescenceHelperOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_peddlers_2" });
             this.RefreshPropsAndClothing(characterCreation, false, "_to_carry_bd_fabric_c", true, "");
         }
-
         new protected void UrbanAdolescenceWatcherOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_fox" });
             this.RefreshPropsAndClothing(characterCreation, false, "", true, "");
         }
-
         new protected void UrbanAdolescenceMarketerOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_manners" });
             this.RefreshPropsAndClothing(characterCreation, false, "", true, "");
         }
-
         new protected void UrbanAdolescenceGangerOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_athlete" });
             this.RefreshPropsAndClothing(characterCreation, false, "", true, "");
         }
-
         new protected void UrbanAdolescenceDockerOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_peddlers" });
             this.RefreshPropsAndClothing(characterCreation, false, "_to_carry_bd_basket_a", true, "");
         }
-
         new protected void UrbanAdolescenceHorserOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_peddlers_2" });
             this.RefreshPropsAndClothing(characterCreation, false, "_to_carry_bd_fabric_c", true, "");
         }
-
         new protected void UrbanAdolescenceTutorOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_book" });
             this.RefreshPropsAndClothing(characterCreation, false, "character_creation_notebook", false, "");
         }
-
         new protected static void RuralAdolescenceHerderOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void RuralAdolescenceSmithyOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void RuralAdolescenceRepairmanOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void RuralAdolescenceGathererOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void RuralAdolescenceHunterOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void RuralAdolescenceHelperOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void UrbanAdolescenceWatcherOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void UrbanAdolescenceMarketerOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void UrbanAdolescenceGangerOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected static void UrbanAdolescenceDockerOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected void YouthOnInit(CharacterCreation characterCreation)
         {
             characterCreation.IsPlayerAlone = true;
@@ -970,7 +836,6 @@ namespace Warlord.patches
             }
             this.RefreshPlayerAppearance(characterCreation);
         }
-
         new protected void RefreshPlayerAppearance(CharacterCreation characterCreation)
         {
             string text = string.Concat(new object[]
@@ -979,210 +844,171 @@ namespace Warlord.patches
             this.ChangePlayerOutfit(characterCreation, text);
             this.ApplyEquipments(characterCreation);
         }
-
         new protected bool YouthCommanderOnCondition()
         {
             return base.GetSelectedCulture().StringId == "empire" && this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Retainer;
         }
-
         new protected void YouthCommanderOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool YouthGroomOnCondition()
         {
             return base.GetSelectedCulture().StringId == "vlandia" && this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Retainer;
         }
-
         new protected void YouthCommanderOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 10;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_decisive" });
         }
-
         new protected void YouthGroomOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 10;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_sharp" });
         }
-
         new protected void YouthChieftainOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 10;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_ready" });
         }
-
         new protected void YouthCavalryOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 9;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_apprentice" });
         }
-
         new protected void YouthHearthGuardOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 9;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_athlete" });
         }
-
         new protected void YouthOutridersOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 2;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_gracious" });
         }
-
         new protected void YouthOtherOutridersOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 2;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_gracious" });
         }
-
         new protected void YouthInfantryOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 3;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_fierce" });
         }
-
         new protected void YouthSkirmisherOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 4;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_fox" });
         }
-
         new protected void YouthGarrisonOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 1;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_vibrant" });
         }
-
         new protected void YouthOtherGarrisonOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 1;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_sharp" });
         }
-
         new protected void YouthKernOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 8;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_apprentice" });
         }
-
         new protected void YouthCamperOnConsequence(CharacterCreation characterCreation)
         {
             base.SelectedTitleType = 5;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_militia" });
         }
-
         new protected void YouthGroomOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool YouthChieftainOnCondition()
         {
             return (base.GetSelectedCulture().StringId == "battania" || base.GetSelectedCulture().StringId == "khuzait") && this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Retainer;
         }
-
         new protected void YouthChieftainOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool YouthCavalryOnCondition()
         {
             return base.GetSelectedCulture().StringId == "empire" || base.GetSelectedCulture().StringId == "khuzait" || base.GetSelectedCulture().StringId == "aserai" || base.GetSelectedCulture().StringId == "vlandia";
         }
-
         new protected void YouthCavalryOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool YouthHearthGuardOnCondition()
         {
             return base.GetSelectedCulture().StringId == "sturgia" || base.GetSelectedCulture().StringId == "battania";
         }
-
         new protected void YouthHearthGuardOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool YouthOutridersOnCondition()
         {
             return base.GetSelectedCulture().StringId == "empire" || base.GetSelectedCulture().StringId == "khuzait";
         }
-
         new protected void YouthOutridersOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool YouthOtherOutridersOnCondition()
         {
             return base.GetSelectedCulture().StringId != "empire" && base.GetSelectedCulture().StringId != "khuzait";
         }
-
         new protected void YouthOtherOutridersOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected void YouthInfantryOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected void YouthSkirmisherOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool YouthGarrisonOnCondition()
         {
             return base.GetSelectedCulture().StringId == "empire" || base.GetSelectedCulture().StringId == "vlandia";
         }
-
         new protected void YouthGarrisonOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool YouthOtherGarrisonOnCondition()
         {
             return base.GetSelectedCulture().StringId != "empire" && base.GetSelectedCulture().StringId != "vlandia";
         }
-
         new protected void YouthOtherGarrisonOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool YouthSkirmisherOnCondition()
         {
             return base.GetSelectedCulture().StringId != "battania";
         }
-
         new protected bool YouthKernOnCondition()
         {
             return base.GetSelectedCulture().StringId == "battania";
         }
-
         new protected void YouthKernOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool YouthCamperOnCondition()
         {
             return this._familyOccupationType != SandboxCharacterCreationContent.OccupationTypes.Retainer;
         }
-
         new protected void YouthCamperOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected void AccomplishmentOnInit(CharacterCreation characterCreation)
         {
             characterCreation.IsPlayerAlone = true;
@@ -1192,106 +1018,84 @@ namespace Warlord.patches
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_schooled" });
             this.RefreshPlayerAppearance(characterCreation);
         }
-
         new protected void AccomplishmentDefeatedEnemyOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected void AccomplishmentExpeditionOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected bool AccomplishmentRuralOnCondition()
         {
             return this.RuralType();
         }
-
         new protected bool AccomplishmentMerchantOnCondition()
         {
             return this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Merchant;
         }
-
         new protected bool AccomplishmentPosseOnConditions()
         {
             return this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Retainer || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Herder || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Mercenary;
         }
-
         new protected bool AccomplishmentSavedVillageOnCondition()
         {
             return this.RuralType() && this._familyOccupationType != SandboxCharacterCreationContent.OccupationTypes.Retainer && this._familyOccupationType != SandboxCharacterCreationContent.OccupationTypes.Herder;
         }
-
         new protected bool AccomplishmentSavedStreetOnCondition()
         {
             return !this.RuralType() && this._familyOccupationType != SandboxCharacterCreationContent.OccupationTypes.Merchant && this._familyOccupationType != SandboxCharacterCreationContent.OccupationTypes.Mercenary;
         }
-
         new protected bool AccomplishmentUrbanOnCondition()
         {
             return !this.RuralType();
         }
-
         new protected void AccomplishmentWorkshopOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected void AccomplishmentSiegeHunterOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected void AccomplishmentEscapadeOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected void AccomplishmentTreaterOnApply(CharacterCreation characterCreation)
         {
         }
-
         new protected void AccomplishmentDefeatedEnemyOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_athlete" });
         }
-
         new protected void AccomplishmentExpeditionOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_gracious" });
         }
-
         new protected void AccomplishmentMerchantOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_ready" });
         }
-
         new protected void AccomplishmentSavedVillageOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_vibrant" });
         }
-
         new protected void AccomplishmentSavedStreetOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_vibrant" });
         }
-
         new protected void AccomplishmentWorkshopOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_decisive" });
         }
-
         new protected void AccomplishmentSiegeHunterOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_tough" });
         }
-
         new protected void AccomplishmentEscapadeOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_clever" });
         }
-
         new protected void AccomplishmentTreaterOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_manners" });
         }
-
         new protected void StartingAgeOnInit(CharacterCreation characterCreation)
         {
             characterCreation.IsPlayerAlone = true;
@@ -1301,7 +1105,6 @@ namespace Warlord.patches
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_schooled" });
             this.RefreshPlayerAppearance(characterCreation);
         }
-
         new protected void StartingAgeYoungOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ClearFaceGenPrefab();
@@ -1311,7 +1114,6 @@ namespace Warlord.patches
             this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.YoungAdult;
             this.SetHeroAge(20f);
         }
-
         new protected void StartingAgeAdultOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ClearFaceGenPrefab();
@@ -1321,7 +1123,6 @@ namespace Warlord.patches
             this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.Adult;
             this.SetHeroAge(30f);
         }
-
         new protected void StartingAgeMiddleAgedOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ClearFaceGenPrefab();
@@ -1331,7 +1132,6 @@ namespace Warlord.patches
             this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.MiddleAged;
             this.SetHeroAge(40f);
         }
-
         new protected void StartingAgeElderlyOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ClearFaceGenPrefab();
@@ -1341,27 +1141,22 @@ namespace Warlord.patches
             this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.Elder;
             this.SetHeroAge(50f);
         }
-
         new protected void StartingAgeYoungOnApply(CharacterCreation characterCreation)
         {
             this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.YoungAdult;
         }
-
         new protected void StartingAgeAdultOnApply(CharacterCreation characterCreation)
         {
             this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.Adult;
         }
-
         new protected void StartingAgeMiddleAgedOnApply(CharacterCreation characterCreation)
         {
             this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.MiddleAged;
         }
-
         new protected void StartingAgeElderlyOnApply(CharacterCreation characterCreation)
         {
             this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.Elder;
         }
-
         new protected void ApplyEquipments(CharacterCreation characterCreation)
         {
             SandboxCharacterCreationContent.ClearMountEntity(characterCreation);
@@ -1377,12 +1172,10 @@ namespace Warlord.patches
             }
             SandboxCharacterCreationContent.ChangePlayerMount(characterCreation, Hero.MainHero);
         }
-
         new protected void SetHeroAge(float age)
         {
             Hero.MainHero.SetBirthDay(CampaignTime.YearsFromNow(-age));
         }
-
         new protected const int FocusToAddYouthStart = 2;
         new protected const int FocusToAddAdultStart = 4;
         new protected const int FocusToAddMiddleAgedStart = 6;

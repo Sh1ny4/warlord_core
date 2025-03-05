@@ -352,14 +352,14 @@ namespace Warlord.patches
         }
         protected bool IsMaleOnCondition()
         {
-            return !Hero.MainHero.IsFemale;
+            return !(Hero.MainHero.IsFemale);
         }
         new protected void YouthCommanderOnApply(CharacterCreation characterCreation)
         {
         }
         protected bool IsFemaleOnCondition()
         {
-            return !Hero.MainHero.IsFemale;
+            return Hero.MainHero.IsFemale;
         }
         new protected void YouthCommanderOnConsequence(CharacterCreation characterCreation)
         {
@@ -542,30 +542,6 @@ namespace Warlord.patches
         }
         new protected void AccomplishmentExpeditionOnApply(CharacterCreation characterCreation)
         {
-        }
-        new protected bool AccomplishmentRuralOnCondition()
-        {
-            return this.RuralType();
-        }
-        new protected bool AccomplishmentMerchantOnCondition()
-        {
-            return this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Merchant;
-        }
-        new protected bool AccomplishmentPosseOnConditions()
-        {
-            return this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Retainer || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Herder || this._familyOccupationType == SandboxCharacterCreationContent.OccupationTypes.Mercenary;
-        }
-        new protected bool AccomplishmentSavedVillageOnCondition()
-        {
-            return this.RuralType() && this._familyOccupationType != SandboxCharacterCreationContent.OccupationTypes.Retainer && this._familyOccupationType != SandboxCharacterCreationContent.OccupationTypes.Herder;
-        }
-        new protected bool AccomplishmentSavedStreetOnCondition()
-        {
-            return !this.RuralType() && this._familyOccupationType != SandboxCharacterCreationContent.OccupationTypes.Merchant && this._familyOccupationType != SandboxCharacterCreationContent.OccupationTypes.Mercenary;
-        }
-        new protected bool AccomplishmentUrbanOnCondition()
-        {
-            return !this.RuralType();
         }
         new protected void AccomplishmentWorkshopOnApply(CharacterCreation characterCreation)
         {

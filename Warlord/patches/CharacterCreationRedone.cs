@@ -1,12 +1,11 @@
-﻿
-using HarmonyLib;
+﻿using HarmonyLib;
 using Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterCreationContent;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
-using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -14,7 +13,7 @@ using TaleWorlds.Localization;
 namespace Warlord.patches
 {
     [HarmonyPatch(typeof(SandboxCharacterCreationContent), "OnInitialized")]
-    class CharacterCreationRedone : SandboxCharacterCreationContent
+    public class CharacterCreationRedone : SandboxCharacterCreationContent
     {
         [HarmonyPrefix]
         static bool Prefix(ref CharacterCreationRedone __instance, CharacterCreation characterCreation)
@@ -24,16 +23,13 @@ namespace Warlord.patches
         }
         public void AddMenus(CharacterCreation characterCreation)
         {
-            this.FatherBackgroundMenu(characterCreation);
-            this.EducationMenu(characterCreation);
-            this.AdulthoodMenu(characterCreation);
-            this.ReasonForAdventureMenu(characterCreation);
-            this.AgeSelectionMenu(characterCreation);
+            FatherBackgroundMenu(characterCreation);
+            EducationMenu(characterCreation);
+            AdulthoodMenu(characterCreation);
+            ReasonForAdventureMenu(characterCreation);
+            AgeSelectionMenu(characterCreation);
         }
-        protected override void OnApplyCulture()
-        {
-        }
-        protected void FatherBackgroundMenu(CharacterCreation characterCreation)
+        public void FatherBackgroundMenu(CharacterCreation characterCreation)
         {
             CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("{=!}Father Background", null), new TextObject("{=!}You were born years ago, in land far away. Your father was...", null), new CharacterCreationOnInit(this.ParentsOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
             CharacterCreationCategory parentscategory = characterCreationMenu.AddMenuCategory(null);
@@ -45,11 +41,11 @@ namespace Warlord.patches
             parentscategory.AddCategoryOption(new TextObject("{=!}A thief", null), new MBList<SkillObject> { DefaultSkills.Scouting, DefaultSkills.Riding }, DefaultCharacterAttributes.Cunning, 1, 20, 2, null, new CharacterCreationOnSelect(this.ThiefOnConsequence), new CharacterCreationApplyFinalEffects(this.ParentsOnApply), new TextObject("{=!}As the (son/daughter) of a thief, you had very little 'formal' education. Instead you were out on the street, begging until you learned how to pick locks, all the way through your childhood. Still, these long years made you streetwise and sharp to the secrets of cities and shadowy backways.", null), null, 0, 0, 0, 0, 0);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-        new protected void ParentsOnInit(CharacterCreation characterCreation)
+        new public void ParentsOnInit(CharacterCreation characterCreation)
         {
             characterCreation.IsPlayerAlone = false;
             characterCreation.HasSecondaryCharacter = false;
-            SandboxCharacterCreationContent.ClearMountEntity(characterCreation);
+            CharacterCreationRedone.ClearMountEntity(characterCreation);
             characterCreation.ClearFaceGenPrefab();
             if (base.PlayerBodyProperties != CharacterObject.PlayerCharacter.GetBodyProperties(CharacterObject.PlayerCharacter.Equipment, -1))
             {
@@ -66,7 +62,7 @@ namespace Warlord.patches
             this.ChangeParentsOutfit(characterCreation, "", "", true, true);
             this.ChangeParentsAnimation(characterCreation);
         }
-        new protected void ChangeParentsOutfit(CharacterCreation characterCreation, string fatherItemId = "", string motherItemId = "", bool isLeftHandItemForFather = true, bool isLeftHandItemForMother = true)
+        new public void ChangeParentsOutfit(CharacterCreation characterCreation, string fatherItemId = "", string motherItemId = "", bool isLeftHandItemForFather = true, bool isLeftHandItemForMother = true)
         {
             characterCreation.ClearFaceGenPrefab();
             List<Equipment> list = new List<Equipment>();
@@ -99,12 +95,12 @@ namespace Warlord.patches
             list.Add(equipment2);
             characterCreation.ChangeCharactersEquipment(list);
         }
-        new protected void ChangeParentsAnimation(CharacterCreation characterCreation)
+        new public void ChangeParentsAnimation(CharacterCreation characterCreation)
         {
             List<string> actionList = new List<string> { "anim_mother_" + base.SelectedParentType, "anim_father_" + base.SelectedParentType };
             characterCreation.ChangeCharsAnimation(actionList);
         }
-        new protected void SetParentAndOccupationType(CharacterCreation characterCreation, int parentType, SandboxCharacterCreationContent.OccupationTypes occupationType, string fatherItemId = "", string motherItemId = "", bool isLeftHandItemForFather = true, bool isLeftHandItemForMother = true)
+        new private void SetParentAndOccupationType(CharacterCreation characterCreation, int parentType, CharacterCreationRedone.OccupationTypes occupationType, string fatherItemId = "", string motherItemId = "", bool isLeftHandItemForFather = true, bool isLeftHandItemForMother = true)
         {
             base.SelectedParentType = parentType;
             this._familyOccupationType = occupationType;
@@ -112,67 +108,67 @@ namespace Warlord.patches
             this.ChangeParentsAnimation(characterCreation);
             this.ChangeParentsOutfit(characterCreation, fatherItemId, motherItemId, isLeftHandItemForFather, isLeftHandItemForMother);
         }
-        protected bool RhodokParentsOnCondition()
+        public bool RhodokParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "empire";
         }
-        protected bool SwadianParentsOnCondition()
+        public bool SwadianParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "vlandia";
         }
-        protected bool VaegirParentsOnCondition()
+        public bool VaegirParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "sturgia";
         }
-        protected bool SarranidParentsOnCondition()
+        public bool SarranidParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "aserai";
         }
-        protected bool NordParentsOnCondition()
+        public bool NordParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "battania";
         }
-        protected bool KhergitParentsOnCondition()
+        public bool KhergitParentsOnCondition()
         {
             return base.GetSelectedCulture().StringId == "khuzait";
         }
-        protected bool IsMaleOnCondition()
+        public bool IsMaleOnCondition()
         {
             return !(Hero.MainHero.IsFemale);
         }
-        protected bool IsFemaleOnCondition()
+        public bool IsFemaleOnCondition()
         {
             return Hero.MainHero.IsFemale;
         }
-        protected void ParentsOnApply(CharacterCreation characterCreation)
+        public void ParentsOnApply(CharacterCreation characterCreation)
         {
             this.FinalizeParents();
         }
-        protected void ImpoverishedNobleOnConsequence(CharacterCreation characterCreation)
+        public void ImpoverishedNobleOnConsequence(CharacterCreation characterCreation)
         {
-            this.SetParentAndOccupationType(characterCreation, 1, SandboxCharacterCreationContent.OccupationTypes.Retainer, "", "", true, true);
+            this.SetParentAndOccupationType(characterCreation, 1, CharacterCreationRedone.OccupationTypes.Retainer, "", "", true, true);
         }
-        protected void TravellingMerchantOnConsequence(CharacterCreation characterCreation)
+        public void TravellingMerchantOnConsequence(CharacterCreation characterCreation)
         {
-            this.SetParentAndOccupationType(characterCreation, 2, SandboxCharacterCreationContent.OccupationTypes.Merchant, "", "", true, true);
+            this.SetParentAndOccupationType(characterCreation, 2, CharacterCreationRedone.OccupationTypes.Merchant, "", "", true, true);
         }
-        protected void VeteranWarriorOnConsequence(CharacterCreation characterCreation)
+        public void VeteranWarriorOnConsequence(CharacterCreation characterCreation)
         {
-            this.SetParentAndOccupationType(characterCreation, 3, SandboxCharacterCreationContent.OccupationTypes.Herder, "", "", true, true);
+            this.SetParentAndOccupationType(characterCreation, 3, CharacterCreationRedone.OccupationTypes.Herder, "", "", true, true);
         }
-        protected void HunterOnConsequence(CharacterCreation characterCreation)
+        public void HunterOnConsequence(CharacterCreation characterCreation)
         {
-            this.SetParentAndOccupationType(characterCreation, 4, SandboxCharacterCreationContent.OccupationTypes.Farmer, "", "", true, true);
+            this.SetParentAndOccupationType(characterCreation, 4, CharacterCreationRedone.OccupationTypes.Farmer, "", "", true, true);
         }
-        protected void SteppeNomadOnConsequence(CharacterCreation characterCreation)
+        public void SteppeNomadOnConsequence(CharacterCreation characterCreation)
         {
-            this.SetParentAndOccupationType(characterCreation, 5, SandboxCharacterCreationContent.OccupationTypes.Healer, "", "", true, true);
+            this.SetParentAndOccupationType(characterCreation, 5, CharacterCreationRedone.OccupationTypes.Healer, "", "", true, true);
         }
-        protected void ThiefOnConsequence(CharacterCreation characterCreation)
+        public void ThiefOnConsequence(CharacterCreation characterCreation)
         {
-            this.SetParentAndOccupationType(characterCreation, 6, SandboxCharacterCreationContent.OccupationTypes.Herder, "", "", true, true);
+            this.SetParentAndOccupationType(characterCreation, 6, CharacterCreationRedone.OccupationTypes.Herder, "", "", true, true);
         }
-        new protected void FinalizeParents()
+        new public void FinalizeParents()
         {
             CharacterObject @object = Game.Current.ObjectManager.GetObject<CharacterObject>("main_hero_mother");
             CharacterObject object2 = Game.Current.ObjectManager.GetObject<CharacterObject>("main_hero_father");
@@ -202,7 +198,7 @@ namespace Warlord.patches
             @object.HeroObject.SetHasMet();
             object2.HeroObject.SetHasMet();
         }
-        new protected static List<FaceGenChar> ChangePlayerFaceWithAge(float age, string actionName = "act_childhood_schooled")
+        new public static List<FaceGenChar> ChangePlayerFaceWithAge(float age, string actionName = "act_childhood_schooled")
         {
             List<FaceGenChar> list = new List<FaceGenChar>();
             BodyProperties bodyProperties = CharacterObject.PlayerCharacter.GetBodyProperties(CharacterObject.PlayerCharacter.Equipment, -1);
@@ -210,7 +206,7 @@ namespace Warlord.patches
             list.Add(new FaceGenChar(bodyProperties, CharacterObject.PlayerCharacter.Race, new Equipment(), CharacterObject.PlayerCharacter.IsFemale, actionName));
             return list;
         }
-        new protected Equipment ChangePlayerOutfit(CharacterCreation characterCreation, string outfit)
+        new public Equipment ChangePlayerOutfit(CharacterCreation characterCreation, string outfit)
         {
             List<Equipment> list = new List<Equipment>();
             MBEquipmentRoster @object = Game.Current.ObjectManager.GetObject<MBEquipmentRoster>(outfit);
@@ -224,7 +220,7 @@ namespace Warlord.patches
             characterCreation.ChangeCharactersEquipment(list);
             return equipment;
         }
-        new protected static void ChangePlayerMount(CharacterCreation characterCreation, Hero hero)
+        new public static void ChangePlayerMount(CharacterCreation characterCreation, Hero hero)
         {
             if (hero.CharacterObject.HasMount())
             {
@@ -232,12 +228,11 @@ namespace Warlord.patches
                 characterCreation.SetFaceGenMount(faceGenMount);
             }
         }
-        new protected static void ClearMountEntity(CharacterCreation characterCreation)
+        new public static void ClearMountEntity(CharacterCreation characterCreation)
         {
             characterCreation.ClearFaceGenMounts();
         }
-        //education
-        protected void EducationMenu(CharacterCreation characterCreation)
+        public void EducationMenu(CharacterCreation characterCreation)
         {
             CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("{=!}Early Life and Education", null), new TextObject("{=!}You started to learn about the world almost as soon as you could walk and talk. You spent your early life as...", null), new CharacterCreationOnInit(this.EducationOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
             CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(null);
@@ -248,19 +243,19 @@ namespace Warlord.patches
             characterCreationCategory.AddCategoryOption(new TextObject("{=!}A steppe child", null), new MBList<SkillObject> { DefaultSkills.Charm, DefaultSkills.Leadership }, DefaultCharacterAttributes.Social, 1, 20, 2, null, new CharacterCreationOnSelect(this.SteppeChildOnConsequence), new CharacterCreationApplyFinalEffects(this.EducationOnApply), new TextObject("{=!}You rode the great steppes on a horse of your own, learning the ways of the grass and the desert. Although you sometimes went hungry, you became a skillful hunter and pathfinder in this trackless country. Your body too started to harden with muscle as you grew into the life of a nomad (man/woman).", null), null, 0, 0, 0, 0, 0);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-        new protected void EducationOnInit(CharacterCreation characterCreation)
+        new public void EducationOnInit(CharacterCreation characterCreation)
         {
             characterCreation.IsPlayerAlone = true;
             characterCreation.HasSecondaryCharacter = false;
             characterCreation.ClearFaceGenPrefab();
-            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge((float)this.EducationAge, "act_childhood_schooled"));
+            characterCreation.ChangeFaceGenChars(CharacterCreationRedone.ChangePlayerFaceWithAge((float)this.EducationAge, "act_childhood_schooled"));
             string text = string.Concat(new object[] { "player_char_creation_education_age_", base.GetSelectedCulture().StringId, "_", base.SelectedParentType });
             text += (Hero.MainHero.IsFemale ? "_f" : "_m");
             this.ChangePlayerOutfit(characterCreation, text);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_schooled" });
-            SandboxCharacterCreationContent.ClearMountEntity(characterCreation);
+            CharacterCreationRedone.ClearMountEntity(characterCreation);
         }
-        new protected void RefreshPropsAndClothing(CharacterCreation characterCreation, bool isChildhoodStage, string itemId, bool isLeftHand, string secondItemId = "")
+        new public void RefreshPropsAndClothing(CharacterCreation characterCreation, bool isChildhoodStage, string itemId, bool isLeftHand, string secondItemId = "")
         {
             characterCreation.ClearFaceGenPrefab();
             characterCreation.ClearCharactersEquipment();
@@ -284,36 +279,35 @@ namespace Warlord.patches
             }
             characterCreation.ChangeCharactersEquipment(new List<Equipment> { equipment });
         }
-        protected void PageOnConsequence(CharacterCreation characterCreation)
+        public void PageOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_streets" });
             this.RefreshPropsAndClothing(characterCreation, false, "carry_bostaff_rogue1", true, "");
         }
-        protected void ApprenticeOnConsequence(CharacterCreation characterCreation)
+        public void ApprenticeOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_militia" });
             this.RefreshPropsAndClothing(characterCreation, false, "peasant_hammer_1_t1", true, "");
         }
-        protected void AssistantOnConsequence(CharacterCreation characterCreation)
+        public void AssistantOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_grit" });
             this.RefreshPropsAndClothing(characterCreation, false, "carry_hammer", true, "");
         }
-        protected void UrchinOnConsequence(CharacterCreation characterCreation)
+        public void UrchinOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_peddlers" });
             this.RefreshPropsAndClothing(characterCreation, false, "_to_carry_bd_basket_a", true, "");
         }
-        protected void SteppeChildOnConsequence(CharacterCreation characterCreation)
+        public void SteppeChildOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_sharp" });
             this.RefreshPropsAndClothing(characterCreation, false, "composite_bow", true, "");
         }
-        protected void EducationOnApply(CharacterCreation characterCreation)
+        public void EducationOnApply(CharacterCreation characterCreation)
         {
         }
-        //youth
-        protected void AdulthoodMenu(CharacterCreation characterCreation)
+        public void AdulthoodMenu(CharacterCreation characterCreation)
         {
             CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("{=!}Adulthood", null), new TextObject("{=!}Then, as a young adult, life changed as it always does. You became...", null), new CharacterCreationOnInit(this.YouthOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
             CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(null);
@@ -326,12 +320,12 @@ namespace Warlord.patches
             characterCreationCategory.AddCategoryOption(new TextObject("{=!}A game poacher", null), new MBList<SkillObject> { DefaultSkills.Bow, DefaultSkills.Engineering }, DefaultCharacterAttributes.Intelligence, 1, 20, 2, null, new CharacterCreationOnSelect(this.PoacherOnConsequence), new CharacterCreationApplyFinalEffects(this.AdulthoodOnApply), new TextObject("{=!}Dissatisfied with the common men's desperate scrabble for coin, you took to your local lord's own forests and decided to help yourself to its bounty, laws be damned. You hunted stags, boars and geese and sold the precious meat under the table. You cut down trees right under the watchmen's noses and turned them into firewood that warmed many freezing homes during winter. All for a few silvers, of course.", null), null, 0, 0, 0, 0, 0);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-        new protected void YouthOnInit(CharacterCreation characterCreation)
+        new public void YouthOnInit(CharacterCreation characterCreation)
         {
             characterCreation.IsPlayerAlone = true;
             characterCreation.HasSecondaryCharacter = false;
             characterCreation.ClearFaceGenPrefab();
-            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge((float)this.YouthAge, "act_childhood_schooled"));
+            characterCreation.ChangeFaceGenChars(CharacterCreationRedone.ChangePlayerFaceWithAge((float)this.YouthAge, "act_childhood_schooled"));
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_schooled" });
             if (base.SelectedTitleType < 1 || base.SelectedTitleType > 10)
             {
@@ -339,60 +333,59 @@ namespace Warlord.patches
             }
             this.RefreshPlayerAppearance(characterCreation);
         }
-        new protected void RefreshPlayerAppearance(CharacterCreation characterCreation)
+        new public void RefreshPlayerAppearance(CharacterCreation characterCreation)
         {
             string text = string.Concat(new object[] { "player_char_creation_", base.GetSelectedCulture().StringId, "_", base.SelectedTitleType });
             text += (Hero.MainHero.IsFemale ? "_f" : "_m");
             this.ChangePlayerOutfit(characterCreation, text);
             this.ApplyEquipments(characterCreation);
         }
-        protected void AdulthoodOnApply(CharacterCreation characterCreation)
+        public void AdulthoodOnApply(CharacterCreation characterCreation)
         {
         }
-        protected void SquireOnConsequence(CharacterCreation characterCreation)
+        public void SquireOnConsequence(CharacterCreation characterCreation)
         {
-            base.SelectedTitleType = 10;
+            base.SelectedTitleType = 1;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_decisive" });
         }
-        protected void LadyOnConsequence(CharacterCreation characterCreation)
+        public void LadyOnConsequence(CharacterCreation characterCreation)
         {
-            base.SelectedTitleType = 10;
+            base.SelectedTitleType = 2;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_sharp" });
         }
-        protected void TroubadourOnConsequence(CharacterCreation characterCreation)
+        public void TroubadourOnConsequence(CharacterCreation characterCreation)
         {
-            base.SelectedTitleType = 10;
+            base.SelectedTitleType = 3;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_ready" });
         }
-        protected void StudentOnConsequence(CharacterCreation characterCreation)
+        public void StudentOnConsequence(CharacterCreation characterCreation)
         {
-            base.SelectedTitleType = 9;
+            base.SelectedTitleType = 4;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_apprentice" });
         }
-        protected void PeddlerOnConsequence(CharacterCreation characterCreation)
+        public void PeddlerOnConsequence(CharacterCreation characterCreation)
         {
-            base.SelectedTitleType = 9;
+            base.SelectedTitleType = 5;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_athlete" });
         }
-        protected void SmithOnConsequence(CharacterCreation characterCreation)
+        public void SmithOnConsequence(CharacterCreation characterCreation)
         {
-            base.SelectedTitleType = 1;
+            base.SelectedTitleType = 6;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_vibrant" });
         }
-        protected void PoacherOnConsequence(CharacterCreation characterCreation)
+        public void PoacherOnConsequence(CharacterCreation characterCreation)
         {
-            base.SelectedTitleType = 1;
+            base.SelectedTitleType = 7;
             this.RefreshPlayerAppearance(characterCreation);
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_sharp" });
         }
-        //accomplishement
-        protected void ReasonForAdventureMenu(CharacterCreation characterCreation)
+        public void ReasonForAdventureMenu(CharacterCreation characterCreation)
         {
             MBTextManager.SetTextVariable("EXP_VALUE", 20);
             CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("{=!}Reasons for Adventure", null), new TextObject("{=!}But soon everything changed and you decided to strike out on your own as an adventurer. What made you take this decision was...", null), new CharacterCreationOnInit(this.AccomplishmentOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
@@ -404,172 +397,117 @@ namespace Warlord.patches
             characterCreationCategory.AddCategoryOption(new TextObject("{=!}Lust for money and power", null), new MBList<SkillObject> { DefaultSkills.Tactics, DefaultSkills.Leadership }, DefaultCharacterAttributes.Cunning, 1, 20, 2, null, new CharacterCreationOnSelect(this.LustOnConsequence), new CharacterCreationApplyFinalEffects(this.ReasonOnApply), new TextObject("{=!}To everyone else, it's clear that you're now motivated solely by personal gain. You want to be rich, powerful, respected, feared. You want to be the one whom others hurry to obey. You want people to know your name, and tremble whenever it is spoken. You want everything, and you won't let anyone stop you from having it...", null), new MBList<TraitObject> { DefaultTraits.Calculating }, 1, 10, 0, 0, 0);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-        new protected void AccomplishmentOnInit(CharacterCreation characterCreation)
+        new public void AccomplishmentOnInit(CharacterCreation characterCreation)
         {
             characterCreation.IsPlayerAlone = true;
             characterCreation.HasSecondaryCharacter = false;
             characterCreation.ClearFaceGenPrefab();
-            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge((float)this.AccomplishmentAge, "act_childhood_schooled"));
+            characterCreation.ChangeFaceGenChars(CharacterCreationRedone.ChangePlayerFaceWithAge((float)this.AccomplishmentAge, "act_childhood_schooled"));
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_schooled" });
             this.RefreshPlayerAppearance(characterCreation);
         }
-        protected void ReasonOnApply(CharacterCreation characterCreation)
+        public void ReasonOnApply(CharacterCreation characterCreation)
         {
         }
-        protected void RevengeOnConsequence(CharacterCreation characterCreation)
+        public void RevengeOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_athlete" });
         }
-        protected void LossOnConsequence(CharacterCreation characterCreation)
+        public void LossOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_gracious" });
         }
-        protected void WanderlustOnConsequence(CharacterCreation characterCreation)
+        public void WanderlustOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_ready" });
         }
-        protected void ForcedOutOnConsequence(CharacterCreation characterCreation)
+        public void ForcedOutOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_vibrant" });
         }
-        protected void LustOnConsequence(CharacterCreation characterCreation)
+        public void LustOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_vibrant" });
         }
-        //Age
-        protected void AgeSelectionMenu(CharacterCreation characterCreation)
+        public void AgeSelectionMenu(CharacterCreation characterCreation)
         {
-            MBTextManager.SetTextVariable("EXP_VALUE", 20);
-            CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("{=!}Starting Age", null), new TextObject("{=!}Your character started off on the adventuring path at the age of...", null), new CharacterCreationOnInit(this.StartingAgeOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
+            MBTextManager.SetTextVariable("EXP_VALUE", 30);
+            CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("{=HDFEAYDk}Starting Age", null), new TextObject("{=VlOGrGSn}Your character started off on the adventuring path at the age of...", null), new CharacterCreationOnInit(this.StartingAgeOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
             CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(null);
-            characterCreationCategory.AddCategoryOption(new TextObject("{=!}21", null), new MBList<SkillObject>(), null, 0, 0, 0, null, new CharacterCreationOnSelect(this.StartingAgeYoungOnConsequence), new CharacterCreationApplyFinalEffects(this.StartingAgeYoungOnApply), new TextObject("{=2k7adlh7}While lacking experience a bit, you are full with youthful energy, you are fully eager, for the long years of adventuring ahead.", null), null, 0, 0, 0, 2, 1);
-            characterCreationCategory.AddCategoryOption(new TextObject("{=!}30", null), new MBList<SkillObject>(), null, 0, 0, 0, null, new CharacterCreationOnSelect(this.StartingAgeAdultOnConsequence), new CharacterCreationApplyFinalEffects(this.StartingAgeAdultOnApply), new TextObject("{=NUlVFRtK}You are at your prime, You still have some youthful energy but also have a substantial amount of experience under your belt. ", null), null, 0, 0, 0, 4, 2);
-            characterCreationCategory.AddCategoryOption(new TextObject("{=!}40", null), new MBList<SkillObject>(), null, 0, 0, 0, null, new CharacterCreationOnSelect(this.StartingAgeMiddleAgedOnConsequence), new CharacterCreationApplyFinalEffects(this.StartingAgeMiddleAgedOnApply), new TextObject("{=5MxTYApM}This is the right age for starting off, you have years of experience, and you are old enough for people to respect you and gather under your banner.", null), null, 0, 0, 0, 6, 3);
-            characterCreationCategory.AddCategoryOption(new TextObject("{=!}50", null), new MBList<SkillObject>(), null, 0, 0, 0, null, new CharacterCreationOnSelect(this.StartingAgeElderlyOnConsequence), new CharacterCreationApplyFinalEffects(this.StartingAgeElderlyOnApply), new TextObject("{=ePD5Afvy}While you are past your prime, there is still enough time to go on that last big adventure for you. And you have all the experience you need to overcome anything!", null), null, 0, 0, 0, 8, 4);
+
+            characterCreationCategory.AddCategoryOption(new TextObject("{=!}21", null), new MBList<SkillObject>(), null, 0, 0, 0, null, new CharacterCreationOnSelect(StartingAgeYoungOnConsequence), new CharacterCreationApplyFinalEffects(StartingAgeYoungOnApply), new TextObject("{=2k7adlh7}While lacking experience a bit, you are full with youthful energy, you are fully eager, for the long years of adventuring ahead.", null), null, 0, 0, 0, 2, 1);
+            characterCreationCategory.AddCategoryOption(new TextObject("{=!}30", null), new MBList<SkillObject>(), null, 0, 0, 0, null, new CharacterCreationOnSelect(StartingAgeAdultOnConsequence), new CharacterCreationApplyFinalEffects(StartingAgeAdultOnApply), new TextObject("{=NUlVFRtK}You are at your prime, You still have some youthful energy but also have a substantial amount of experience under your belt. ", null), null, 0, 0, 0, 4, 2);
+            characterCreationCategory.AddCategoryOption(new TextObject("{=!}40", null), new MBList<SkillObject>(), null, 0, 0, 0, null, new CharacterCreationOnSelect(StartingAgeMiddleAgedOnConsequence), new CharacterCreationApplyFinalEffects(StartingAgeMiddleAgedOnApply), new TextObject("{=5MxTYApM}This is the right age for starting off, you have years of experience, and you are old enough for people to respect you and gather under your banner.", null), null, 0, 0, 0, 6, 3);
+            characterCreationCategory.AddCategoryOption(new TextObject("{=!}50", null), new MBList<SkillObject>(), null, 0, 0, 0, null, new CharacterCreationOnSelect(StartingAgeElderlyOnConsequence), new CharacterCreationApplyFinalEffects(StartingAgeElderlyOnApply), new TextObject("{=ePD5Afvy}While you are past your prime, there is still enough time to go on that last big adventure for you. And you have all the experience you need to overcome anything!", null), null, 0, 0, 0, 8, 4);
             characterCreation.AddNewMenu(characterCreationMenu);
         }
-        new protected void StartingAgeOnInit(CharacterCreation characterCreation)
-        {
-            characterCreation.IsPlayerAlone = true;
-            characterCreation.HasSecondaryCharacter = false;
-            characterCreation.ClearFaceGenPrefab();
-            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge((float)this._startingAge, "act_childhood_schooled"));
-            characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_schooled" });
-            this.RefreshPlayerAppearance(characterCreation);
-        }
-        new protected void StartingAgeYoungOnConsequence(CharacterCreation characterCreation)
+
+
+        new public void StartingAgeYoungOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ClearFaceGenPrefab();
-            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge(21f, "act_childhood_schooled"));
+            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge((float)SandboxAgeOptions.YoungAdult, "act_childhood_schooled"));
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_focus" });
             this.RefreshPlayerAppearance(characterCreation);
-            this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.YoungAdult;
+            this._startingAge = (SandboxCharacterCreationContent.SandboxAgeOptions)CharacterCreationRedone.SandboxAgeOptions.YoungAdult;
             this.SetHeroAge(21f);
         }
-        new protected void StartingAgeAdultOnConsequence(CharacterCreation characterCreation)
+        new public void StartingAgeYoungOnApply(CharacterCreation characterCreation)
+        {
+            this._startingAge = (SandboxCharacterCreationContent.SandboxAgeOptions)CharacterCreationRedone.SandboxAgeOptions.YoungAdult;
+        }
+
+
+        new public void StartingAgeAdultOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ClearFaceGenPrefab();
-            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge(30f, "act_childhood_schooled"));
+            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge((float)SandboxAgeOptions.Adult, "act_childhood_schooled"));
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_ready" });
             this.RefreshPlayerAppearance(characterCreation);
-            this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.Adult;
+            this._startingAge = (SandboxCharacterCreationContent.SandboxAgeOptions)CharacterCreationRedone.SandboxAgeOptions.Adult;
             this.SetHeroAge(30f);
         }
-        new protected void StartingAgeMiddleAgedOnConsequence(CharacterCreation characterCreation)
+        new public void StartingAgeAdultOnApply(CharacterCreation characterCreation)
+        {
+            this._startingAge = (SandboxCharacterCreationContent.SandboxAgeOptions)CharacterCreationRedone.SandboxAgeOptions.Adult;
+        }
+
+
+        new public void StartingAgeMiddleAgedOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ClearFaceGenPrefab();
-            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge(40f, "act_childhood_schooled"));
+            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge((float)SandboxAgeOptions.MiddleAged, "act_childhood_schooled"));
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_sharp" });
             this.RefreshPlayerAppearance(characterCreation);
-            this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.MiddleAged;
+            this._startingAge = (SandboxCharacterCreationContent.SandboxAgeOptions)CharacterCreationRedone.SandboxAgeOptions.MiddleAged;
             this.SetHeroAge(40f);
         }
-        new protected void StartingAgeElderlyOnConsequence(CharacterCreation characterCreation)
+        new public void StartingAgeMiddleAgedOnApply(CharacterCreation characterCreation)
+        {
+            this._startingAge = (SandboxCharacterCreationContent.SandboxAgeOptions)CharacterCreationRedone.SandboxAgeOptions.MiddleAged;
+        }
+
+
+        new public void StartingAgeElderlyOnConsequence(CharacterCreation characterCreation)
         {
             characterCreation.ClearFaceGenPrefab();
-            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge(50f, "act_childhood_schooled"));
+            characterCreation.ChangeFaceGenChars(SandboxCharacterCreationContent.ChangePlayerFaceWithAge((float)SandboxAgeOptions.Elder, "act_childhood_schooled"));
             characterCreation.ChangeCharsAnimation(new List<string> { "act_childhood_tough" });
             this.RefreshPlayerAppearance(characterCreation);
-            this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.Elder;
+            this._startingAge = (SandboxCharacterCreationContent.SandboxAgeOptions)CharacterCreationRedone.SandboxAgeOptions.Elder;
             this.SetHeroAge(50f);
         }
-        new protected void StartingAgeYoungOnApply(CharacterCreation characterCreation)
+        new public void StartingAgeElderlyOnApply(CharacterCreation characterCreation)
         {
-            this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.YoungAdult;
+            this._startingAge = (SandboxCharacterCreationContent.SandboxAgeOptions)CharacterCreationRedone.SandboxAgeOptions.Elder;
         }
-        new protected void StartingAgeAdultOnApply(CharacterCreation characterCreation)
-        {
-            this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.Adult;
-        }
-        new protected void StartingAgeMiddleAgedOnApply(CharacterCreation characterCreation)
-        {
-            this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.MiddleAged;
-        }
-        new protected void StartingAgeElderlyOnApply(CharacterCreation characterCreation)
-        {
-            this._startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.Elder;
-        }
-        new protected void ApplyEquipments(CharacterCreation characterCreation)
-        {
-            SandboxCharacterCreationContent.ClearMountEntity(characterCreation);
-            string text = string.Concat(new object[] { "player_char_creation_", base.GetSelectedCulture().StringId, "_", base.SelectedTitleType });
-            text += (Hero.MainHero.IsFemale ? "_f" : "_m");
-            MBEquipmentRoster @object = Game.Current.ObjectManager.GetObject<MBEquipmentRoster>(text);
-            base.PlayerStartEquipment = ((@object?.DefaultEquipment) ?? MBEquipmentRoster.EmptyEquipment);
-            base.PlayerCivilianEquipment = ((@object?.GetCivilianEquipments().FirstOrDefault<Equipment>()) ?? MBEquipmentRoster.EmptyEquipment);
-            if (base.PlayerStartEquipment != null && base.PlayerCivilianEquipment != null)
-            {
-                CharacterObject.PlayerCharacter.Equipment.FillFrom(base.PlayerStartEquipment, true);
-                CharacterObject.PlayerCharacter.FirstCivilianEquipment.FillFrom(base.PlayerCivilianEquipment, true);
-            }
-            SandboxCharacterCreationContent.ChangePlayerMount(characterCreation, Hero.MainHero);
-        }
-        new protected void SetHeroAge(float age)
-        {
-            Hero.MainHero.SetBirthDay(CampaignTime.YearsFromNow(-age));
-        }
-        new protected const int FocusToAddYouthStart = 2;
-        new protected const int FocusToAddAdultStart = 4;
-        new protected const int FocusToAddMiddleAgedStart = 6;
-        new protected const int FocusToAddElderlyStart = 8;
-        new protected const int AttributeToAddYouthStart = 1;
-        new protected const int AttributeToAddAdultStart = 2;
-        new protected const int AttributeToAddMiddleAgedStart = 3;
-        new protected const int AttributeToAddElderlyStart = 4;
-        new protected readonly Dictionary<string, Vec2> _startingPoints = new Dictionary<string, Vec2>
-        {
-              { "empire", new Vec2(657.95f, 279.08f) },
-              { "sturgia", new Vec2(356.75f, 551.52f) },
-              { "aserai", new Vec2(300.78f, 259.99f) },
-              { "battania", new Vec2(293.64f, 446.39f) },
-              { "khuzait", new Vec2(680.73f, 480.8f) },
-              { "vlandia", new Vec2(207.04f, 389.04f) }
-        };
-        new protected SandboxCharacterCreationContent.SandboxAgeOptions _startingAge = SandboxCharacterCreationContent.SandboxAgeOptions.YoungAdult;
-        new protected SandboxCharacterCreationContent.OccupationTypes _familyOccupationType;
-        new protected TextObject _educationIntroductoryText = new TextObject("{=!}{EDUCATION_INTRO}", null);
-        new protected TextObject _youthIntroductoryText = new TextObject("{=!}{YOUTH_INTRO}", null);
-        new protected enum SandboxAgeOptions
+
+        new public enum SandboxAgeOptions
         {
             YoungAdult = 21,
             Adult = 30,
             MiddleAged = 40,
             Elder = 50
-        }
-
-        new protected enum OccupationTypes
-        {
-            Artisan,
-            Bard,
-            Retainer,
-            Merchant,
-            Farmer,
-            Hunter,
-            Vagabond,
-            Mercenary,
-            Herder,
-            Healer,
-            NumberOfTypes
         }
     }
 }

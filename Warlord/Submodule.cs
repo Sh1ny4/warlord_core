@@ -18,6 +18,7 @@ namespace Warlord
         {
             base.OnSubModuleLoad();
             new Harmony("Warlord.patches").PatchAll();
+            CampaignTime startTime = CampaignTime.Years(1257) + CampaignTime.Weeks(4) + CampaignTime.Days(5) + CampaignTime.Hours(12);
             TextObject coreContentDisabledReason = new TextObject("{=!}StoryMode Disable", null);
             TextObject _sandBoxAchievementsHint = new TextObject("{=j09m7S2E}Achievements are disabled in SandBox mode!", null);
             Module.CurrentModule.ClearStateOptions();
